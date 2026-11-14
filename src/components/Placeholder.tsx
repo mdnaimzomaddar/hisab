@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { colors, fontSize } from '../theme';
+import { StyleSheet, Text, View } from "react-native";
+import { colors, fontSize, lazyStyles } from "../theme";
 
 export default function Placeholder({ title }: { title: string }) {
   return (
@@ -10,8 +10,15 @@ export default function Placeholder({ title }: { title: string }) {
   );
 }
 
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' },
-  text: { color: colors.text, fontSize: fontSize.lg, fontWeight: '700' },
-  sub: { color: colors.textMuted, marginTop: 4 },
-});
+const styles = lazyStyles(() =>
+  StyleSheet.create({
+    root: {
+      flex: 1,
+      backgroundColor: colors.bg,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    text: { color: colors.text, fontSize: fontSize.lg, fontWeight: "700" },
+    sub: { color: colors.textMuted, marginTop: 4 },
+  }),
+);

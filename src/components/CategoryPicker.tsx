@@ -1,7 +1,7 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { Category } from '../types';
-import { colors, fontSize, radius, spacing } from '../theme';
+import { Ionicons } from "@expo/vector-icons";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { colors, fontSize, radius, spacing, lazyStyles } from "../theme";
+import { Category } from "../types";
 
 interface Props {
   categories: Category[];
@@ -15,18 +15,25 @@ export function CategoryPicker({ categories, selectedId, onSelect }: Props) {
       {categories.map((c) => {
         const selected = c.id === selectedId;
         return (
-          <Pressable key={c.id} style={styles.item} onPress={() => onSelect(c.id)}>
+          <Pressable
+            key={c.id}
+            style={styles.item}
+            onPress={() => onSelect(c.id)}
+          >
             <View
               style={[
                 styles.circle,
-                { backgroundColor: c.color + '26' },
+                { backgroundColor: c.color + "26" },
                 selected && { borderColor: c.color, borderWidth: 2 },
               ]}
             >
               <Ionicons name={c.icon as any} size={24} color={c.color} />
             </View>
             <Text
-              style={[styles.name, selected && { color: colors.text, fontWeight: '700' }]}
+              style={[
+                styles.name,
+                selected && { color: colors.text, fontWeight: "700" },
+              ]}
               numberOfLines={1}
             >
               {c.name}
@@ -38,17 +45,24 @@ export function CategoryPicker({ categories, selectedId, onSelect }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
-  grid: { flexDirection: 'row', flexWrap: 'wrap' },
-  item: { width: '25%', alignItems: 'center', marginBottom: spacing.lg },
-  circle: {
-    width: 56,
-    height: 56,
-    borderRadius: radius.pill,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  name: { color: colors.textMuted, fontSize: fontSize.xs, marginTop: spacing.xs, maxWidth: '90%' },
-});
+const styles = lazyStyles(() =>
+  StyleSheet.create({
+    grid: { flexDirection: "row", flexWrap: "wrap" },
+    item: { width: "25%", alignItems: "center", marginBottom: spacing.lg },
+    circle: {
+      width: 56,
+      height: 56,
+      borderRadius: radius.pill,
+      alignItems: "center",
+      justifyContent: "center",
+      borderWidth: 2,
+      borderColor: "transparent",
+    },
+    name: {
+      color: colors.textMuted,
+      fontSize: fontSize.xs,
+      marginTop: spacing.xs,
+      maxWidth: "90%",
+    },
+  }),
+);

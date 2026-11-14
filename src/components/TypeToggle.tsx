@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { TransactionType } from '../types';
-import { colors, fontSize, radius, spacing } from '../theme';
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { colors, fontSize, radius, spacing, lazyStyles } from "../theme";
+import { TransactionType } from "../types";
 
 interface Props {
   value: TransactionType;
@@ -15,25 +15,34 @@ export function TypeToggle({ value, onChange }: Props) {
         style={[styles.item, active && { backgroundColor: color }]}
         onPress={() => onChange(type)}
       >
-        <Text style={[styles.text, active && { color: colors.onAccent }]}>{label}</Text>
+        <Text style={[styles.text, active && { color: colors.onAccent }]}>
+          {label}
+        </Text>
       </Pressable>
     );
   };
   return (
     <View style={styles.wrap}>
-      {item('expense', 'Expense', colors.expense)}
-      {item('income', 'Income', colors.income)}
+      {item("expense", "Expense", colors.expense)}
+      {item("income", "Income", colors.income)}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  wrap: {
-    flexDirection: 'row',
-    backgroundColor: colors.surface,
-    borderRadius: radius.pill,
-    padding: 4,
-  },
-  item: { flex: 1, paddingVertical: spacing.sm + 2, borderRadius: radius.pill, alignItems: 'center' },
-  text: { color: colors.textMuted, fontSize: fontSize.md, fontWeight: '700' },
-});
+const styles = lazyStyles(() =>
+  StyleSheet.create({
+    wrap: {
+      flexDirection: "row",
+      backgroundColor: colors.surface,
+      borderRadius: radius.pill,
+      padding: 4,
+    },
+    item: {
+      flex: 1,
+      paddingVertical: spacing.sm + 2,
+      borderRadius: radius.pill,
+      alignItems: "center",
+    },
+    text: { color: colors.textMuted, fontSize: fontSize.md, fontWeight: "700" },
+  }),
+);

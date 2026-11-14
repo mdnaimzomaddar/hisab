@@ -1,9 +1,11 @@
-import { useState } from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
-import { Ionicons } from '@expo/vector-icons';
-import { colors, fontSize, radius, spacing } from '../theme';
-import { formatDisplay, parseDateString, toDateString } from '../utils/date';
+import { Ionicons } from "@expo/vector-icons";
+import DateTimePicker, {
+    DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
+import { useState } from "react";
+import { Pressable, StyleSheet, Text } from "react-native";
+import { colors, fontSize, radius, spacing, lazyStyles } from "../theme";
+import { formatDisplay, parseDateString, toDateString } from "../utils/date";
 
 interface Props {
   value: string;
@@ -17,7 +19,7 @@ export function DateField({ value, onChange, label, allowClear }: Props) {
 
   const handle = (e: DateTimePickerEvent, d?: Date) => {
     setShow(false);
-    if (e.type === 'set' && d) onChange(toDateString(d));
+    if (e.type === "set" && d) onChange(toDateString(d));
   };
 
   return (
@@ -26,10 +28,10 @@ export function DateField({ value, onChange, label, allowClear }: Props) {
       <Pressable style={styles.field} onPress={() => setShow(true)}>
         <Ionicons name="calendar-outline" size={20} color={colors.textMuted} />
         <Text style={[styles.text, !value && { color: colors.textMuted }]}>
-          {value ? formatDisplay(value) : 'Not set'}
+          {value ? formatDisplay(value) : "Not set"}
         </Text>
         {allowClear && value ? (
-          <Pressable onPress={() => onChange('')} hitSlop={10}>
+          <Pressable onPress={() => onChange("")} hitSlop={10}>
             <Ionicons name="close-circle" size={20} color={colors.textMuted} />
           </Pressable>
         ) : null}
@@ -45,15 +47,22 @@ export function DateField({ value, onChange, label, allowClear }: Props) {
   );
 }
 
-const styles = StyleSheet.create({
-  label: { color: colors.textMuted, fontSize: fontSize.sm, marginBottom: spacing.xs, marginTop: spacing.md },
-  field: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderRadius: radius.md,
-    padding: spacing.md,
-    gap: spacing.sm,
-  },
-  text: { flex: 1, color: colors.text, fontSize: fontSize.md },
-});
+const styles = lazyStyles(() =>
+  StyleSheet.create({
+    label: {
+      color: colors.textMuted,
+      fontSize: fontSize.sm,
+      marginBottom: spacing.xs,
+      marginTop: spacing.md,
+    },
+    field: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: colors.surface,
+      borderRadius: radius.md,
+      padding: spacing.md,
+      gap: spacing.sm,
+    },
+    text: { flex: 1, color: colors.text, fontSize: fontSize.md },
+  }),
+);

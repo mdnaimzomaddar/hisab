@@ -15,6 +15,7 @@ import { SYSTEM_CATEGORY_IDS } from '../defaults';
 import { categoryColors, categoryIcons, colors, fontSize, radius, spacing } from '../theme';
 import { Category, TransactionType } from '../types';
 import { TypeToggle } from '../components/TypeToggle';
+import { lazyStyles } from '../theme';
 
 interface Draft {
   id?: string;
@@ -193,7 +194,7 @@ export default function CategoriesScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = lazyStyles(() => StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   toggleWrap: { padding: spacing.lg, paddingBottom: spacing.sm },
   list: { padding: spacing.lg, paddingBottom: 110 },
@@ -284,4 +285,4 @@ const styles = StyleSheet.create({
     backgroundColor: colors.accent,
   },
   saveText: { color: colors.onAccent, fontSize: fontSize.md, fontWeight: '800' },
-});
+}));

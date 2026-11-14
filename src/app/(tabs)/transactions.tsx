@@ -9,6 +9,7 @@ import { formatDisplay } from '../../utils/date';
 import { formatMoney } from '../../utils/money';
 import { TransactionRow } from '../../components/TransactionRow';
 import { Transaction } from '../../types';
+import { lazyStyles } from '../../theme';
 
 type Filter = 'all' | 'income' | 'expense';
 
@@ -91,7 +92,7 @@ export default function TransactionsScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = lazyStyles(() => StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   filters: { flexDirection: 'row', gap: spacing.sm, padding: spacing.lg, paddingBottom: spacing.sm },
   chip: {
@@ -125,4 +126,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     elevation: 6,
   },
-});
+}));

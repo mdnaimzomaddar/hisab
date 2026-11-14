@@ -9,6 +9,7 @@ import { formatMoney, sumAmounts } from '../../utils/money';
 import { useToday } from '../../utils/useToday';
 import { dueInfo } from '../../utils/dueInfo';
 import { Loan, LoanDirection } from '../../types';
+import { lazyStyles } from '../../theme';
 
 export default function LoansScreen() {
   const router = useRouter();
@@ -119,7 +120,7 @@ export default function LoansScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = lazyStyles(() => StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   tabs: {
     flexDirection: 'row',
@@ -176,4 +177,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     elevation: 6,
   },
-});
+}));

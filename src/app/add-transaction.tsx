@@ -9,6 +9,7 @@ import { TransactionType } from '../types';
 import { CategoryPicker } from '../components/CategoryPicker';
 import { DateField } from '../components/DateField';
 import { TypeToggle } from '../components/TypeToggle';
+import { lazyStyles } from '../theme';
 
 export default function AddTransaction() {
   const router = useRouter();
@@ -135,7 +136,7 @@ export default function AddTransaction() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = lazyStyles(() => StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   content: { padding: spacing.lg, paddingBottom: 60 },
   center: { flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' },
@@ -167,4 +168,4 @@ const styles = StyleSheet.create({
   saveText: { color: colors.onAccent, fontSize: fontSize.md, fontWeight: '800' },
   deleteBtn: { alignItems: 'center', paddingVertical: spacing.lg, marginTop: spacing.sm },
   deleteText: { color: colors.expense, fontSize: fontSize.md, fontWeight: '700' },
-});
+}));

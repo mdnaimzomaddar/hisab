@@ -9,7 +9,7 @@ import { formatMoney } from '../utils/money';
 import { LoanDirection } from '../types';
 import { DateField } from '../components/DateField';
 import { ensureNotificationPermission, refreshReminder } from '../notifications';
-
+import { lazyStyles } from '../theme';
 export default function AddLoan() {
   const router = useRouter();
   const navigation = useNavigation();
@@ -157,7 +157,7 @@ export default function AddLoan() {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = lazyStyles(() => StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   content: { padding: spacing.lg, paddingBottom: 60 },
   center: { flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' },
@@ -191,4 +191,4 @@ const styles = StyleSheet.create({
     marginTop: spacing.xl,
   },
   saveText: { color: colors.onAccent, fontSize: fontSize.md, fontWeight: '800' },
-});
+}));

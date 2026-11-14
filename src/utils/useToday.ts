@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { AppState } from 'react-native';
-import { todayString } from './date';
+import { useEffect, useState } from "react";
+import { AppState } from "react-native";
+import { todayString } from "./date";
 
 export function useToday(): string {
   const [today, setToday] = useState(todayString());
@@ -8,8 +8,8 @@ export function useToday(): string {
   useEffect(() => {
     const update = () => setToday(todayString());
     const timer = setInterval(update, 30000);
-    const sub = AppState.addEventListener('change', (s) => {
-      if (s === 'active') update();
+    const sub = AppState.addEventListener("change", (s) => {
+      if (s === "active") update();
     });
     return () => {
       clearInterval(timer);

@@ -11,6 +11,7 @@ import { useToday } from '../../utils/useToday';
 import { dueInfo } from '../../utils/dueInfo';
 import { DateField } from '../../components/DateField';
 import { cancelReminder, refreshReminder } from '../../notifications';
+import { lazyStyles } from '../../theme';
 
 export default function LoanDetail() {
   const router = useRouter();
@@ -249,7 +250,7 @@ function Info({
   );
 }
 
-const styles = StyleSheet.create({
+const styles = lazyStyles(() => StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg },
   content: { padding: spacing.lg, paddingBottom: 60 },
   center: { flex: 1, backgroundColor: colors.bg, alignItems: 'center', justifyContent: 'center' },
@@ -316,4 +317,4 @@ const styles = StyleSheet.create({
   cancelText: { color: colors.text, fontSize: fontSize.md, fontWeight: '700' },
   saveBtn: { flex: 1, paddingVertical: spacing.lg, borderRadius: radius.md, alignItems: 'center', backgroundColor: colors.accent },
   saveText: { color: colors.onAccent, fontSize: fontSize.md, fontWeight: '800' },
-});
+}));
